@@ -19,7 +19,7 @@ const elBody = document.body
 elClear.addEventListener('click', handleClear)
 elReset.addEventListener('click', handleReset)
 elSave.addEventListener('click', handleSave)
-elStart.addEventListener('click', handleStart)
+elStart.addEventListener('click', handleGoToStart)
 elBody.addEventListener('keydown', handleKeyDown)
 elBody.addEventListener('keyup', handleKeyUp)
 elPlay.addEventListener('click', handlePlayButtonClick)
@@ -87,7 +87,7 @@ function handleSave() {
     elSave.blur()
 }
 
-function handleStart() {
+function handleGoToStart() {
     melodyIndex = 0
     resetPlayedMarks()
     elStart.blur()
@@ -107,10 +107,8 @@ function handleKeyboardClick(button) {
 function handlePlaySound() {
     const sound = getNextSound();
     playSound(sound)
-    if (melodyIndex === 0) resetPlayedMarks()
-    markPlayed(melodyIndex)
-    melodyIndex++;
-    if (melodyIndex === userMelody.length) melodyIndex = 0
+    updatePlayedMarks()
+    updateMelodyIndex()
 }
 
 function handleKeyDown({ key }) {
@@ -121,11 +119,6 @@ function handleKeyDown({ key }) {
     }
     handlePlaySound()
     lastKeyDown = key
-}
-
-function addUniqueEventListener(element, event, callback) {
-    element.removeEventListener(event, callback)
-    element.addEventListener(event, callback)
 }
 
 function handleKeyUp({ key: keyUp }) {
@@ -148,10 +141,26 @@ function resetPlayedMarks() {
     elUserNotes.forEach(el => el.classList.remove('played'))
 }
 
+function updatePlayedMarks() {
+    if (melodyIndex === 0) resetPlayedMarks()
+    markPlayed(melodyIndex)
+}
+
+function updateMelodyIndex() {
+    melodyIndex++;
+    if (melodyIndex === userMelody.length) melodyIndex = 0
+}
+
 function playSound(sound) {
     if (!sound) return
     sound.currentTime = 0
     sound.play();
+}
+
+function stopSound(sound) {
+    if (!sound) return
+    sound.pause()
+    sound.currentTime = 0
 }
 
 function getNextSound() {
@@ -160,8 +169,11 @@ function getNextSound() {
     return keyboardSounds[keyboardIndex]
 }
 
-function stopSound(sound) {
-    if (!sound) return
-    sound.pause()
-    sound.currentTime = 0
+function addUniqueEventListener(element, event, callback) {
+    element.removeEventListener(event, callback)
+    element.addEventListener(event, callback)
 }
+
+
+
+
