@@ -60,7 +60,7 @@ function generateSoundsAndButtons() {
             keyboardSounds.push(sound)
             keyboard.push(key)
             keyBoardHtml += `<button class="keyboard-key" data-key="${key}"
-                 data-idx=${keyboardIndex} onclick="handleButtonClick(this)">${key}</button>\n`
+                 data-idx=${keyboardIndex} onclick="handleKeyboardClick(this)">${key}</button>\n`
             keyboardIndex++
         })
     }
