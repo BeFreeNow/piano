@@ -116,13 +116,6 @@ function handlePlaySound() {
     if (melodyIndex === userMelody.length) melodyIndex = 0
 }
 
-function preventPlayOnKeyHold(key) {
-    if (lastKey === key) {
-        elBody.removeEventListener('keydown', handleKeyDown)
-    }
-    lastKey = key
-}
-
 function handleKeyDown({ key }) {
     preventPlayOnKeyHold(key)
     handlePlaySound()
@@ -131,6 +124,13 @@ function handleKeyDown({ key }) {
 function handleKeyUp({ key }) {
     elBody.addEventListener('keydown', handleKeyDown)
     resetLastKey(key)
+}
+
+function preventPlayOnKeyHold(key) {
+    if (lastKey === key) {
+        elBody.removeEventListener('keydown', handleKeyDown)
+    }
+    lastKey = key
 }
 
 function resetLastKey(key) {
