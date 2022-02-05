@@ -38,7 +38,6 @@ button {
     min-height: 100px;
     width: 90%;
     max-width: 800px;
-    padding:  0 8px;
     margin: 0 16px 16px;
     overflow: auto;
 }
@@ -58,7 +57,7 @@ button {
 .keyboard, .controls {
     width: fit-content;
     max-width: 800px;
-    margin: auto 16px 8px;
+    margin: auto 16px 16px;
 }
 
 .keyboard-key {
