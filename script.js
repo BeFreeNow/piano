@@ -106,12 +106,7 @@ function handleKeyboardClick(button) {
     melodyIndex = 0
 }
 
-function handleKeyDown({ key }) {
-    if (lastKey === key) {//prevent redundant events on key hold
-        const listener = document.body.removeEventListener('keydown', handleKeyDown)
-        console.log({ listener });
-        return
-    }
+function handlePlaySound() {
     const sound = getSound();
     playSound(sound)
     prevSound = sound;
@@ -119,22 +114,28 @@ function handleKeyDown({ key }) {
     markPlayed(melodyIndex)
     melodyIndex++;
     if (melodyIndex === userMelody.length) melodyIndex = 0
+}
+
+function preventPlayOnKeyHold(key) {
+    if (lastKey === key) return
     lastKey = key
 }
 
-function handlePlayButtonClick() {
-    const sound = getSound();
-    playSound(sound)
-    prevSound = sound;
-    if (melodyIndex === 0) resetPlayedMarks()
-    markPlayed(melodyIndex)
-    melodyIndex++;
-    if (melodyIndex === userMelody.length) melodyIndex = 0
+function handleKeyDown({ key }) {
+    preventPlayOnKeyHold(key)
+    handlePlaySound()
 }
 
 function handleKeyUp({ key }) {
+    resetLastKey(key) 
+}
+
+function resetLastKey(key) {
     if (lastKey === key) lastKey = null
-    document.body.addEventListener('keydown', handleKeyDown)
+}
+
+function handlePlayButtonClick() {
+    handlePlaySound()
 }
 
 function markPlayed(index) {
