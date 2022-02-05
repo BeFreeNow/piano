@@ -117,32 +117,29 @@ function handlePlaySound() {
 }
 
 function handleKeyDown({ key }) {
-    preventPlayOnKeyHold(key)
-    handlePlaySound()
-}
-
-function preventPlayOnKeyHold(key) {
-    if (lastKey === key) {
+    const isKeyHold = lastKey === key
+    if (isKeyHold) {
         elBody.removeEventListener('keydown', handleKeyDown)
+        return
     }
-    setLastKey(key)
-}
-
-function handleKeyUp({ key }) {
-    elBody.addEventListener('keydown', handleKeyDown)
-    resetLastKey(key)
-}
-
-function setLastKey(key) {
+    handlePlaySound()
     lastKey = key
 }
 
-function resetLastKey(key) {
+function addUniqueListener(element, event, callback) {
+    element.removeEventListener(event, callback)
+    element.addEventListener(event, callback)
+}
+
+function handleKeyUp({ key }) {
     if (lastKey === key) lastKey = null
+    addUniqueListener(elBody, 'keydown', handleKeyDown)
 }
 
 function handlePlayButtonClick() {
     handlePlaySound()
+    lastKey = null
+    elPlay.blur()
 }
 
 function markPlayed(index) {
