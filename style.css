@@ -35,11 +35,10 @@ button{
 }
 
 .melody {
-    min-height: 100px;
+    height: fit-content;
+    max-width: 90%;
     padding: 8px;
     max-width: 700px;
-    border: 1px solid lightgray;
-    border-radius: 4px;
     margin:  8px 8px 16px;
 }
 
