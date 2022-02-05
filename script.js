@@ -22,10 +22,23 @@ elStart.addEventListener('click', handleStart)
 elBody.addEventListener('keydown', handleKeyDown)
 elBody.addEventListener('keyup', handleKeyUp)
 
+let defaultMelody = [
+    { "keyboardIndex": "34", "key": "B5" }, { "keyboardIndex": "33", "key": "A5" }, { "keyboardIndex": "30", "key": "E5" },
+    { "keyboardIndex": "28", "key": "C5" }, { "keyboardIndex": "34", "key": "B5" }, { "keyboardIndex": "33", "key": "A5" },
+    { "keyboardIndex": "30", "key": "E5" }, { "keyboardIndex": "32", "key": "G5" }, { "keyboardIndex": "31", "key": "F5" },
+    { "keyboardIndex": "28", "key": "C5" }, { "keyboardIndex": "26", "key": "A4" }, { "keyboardIndex": "32", "key": "G5" },
+    { "keyboardIndex": "31", "key": "F5" }, { "keyboardIndex": "28", "key": "C5" }, { "keyboardIndex": "31", "key": "F5" },
+    { "keyboardIndex": "30", "key": "E5" }, { "keyboardIndex": "28", "key": "C5" }, { "keyboardIndex": "26", "key": "A4" },
+    { "keyboardIndex": "24", "key": "F4" }, { "keyboardIndex": "23", "key": "E4" }, { "keyboardIndex": "24", "key": "F4" },
+    { "keyboardIndex": "25", "key": "G4" }, { "keyboardIndex": "26", "key": "A4" }, { "keyboardIndex": "27", "key": "B4" },
+    { "keyboardIndex": "28", "key": "C5" }, { "keyboardIndex": "29", "key": "D5" }, { "keyboardIndex": "30", "key": "E5" }
+]
 let melodyIndex = 0
 let lastKey
 let prevSound
-let userMelody = JSON.parse(localStorage.getItem('melody')) || []
+let savedMelody = localStorage.getItem('melody')
+savedMelody = JSON.parse(savedMelody)
+let userMelody = savedMelody?.length ? savedMelody : defaultMelody
 let elUserNotes
 
 function generateMelodyHtml() {
@@ -93,10 +106,10 @@ function handleButtonClick(button) {
 
 function handleKeyDown({ key }) {
     if (lastKey === key) {//prevent redundant events on key hold
-       const listener =  document.body.removeEventListener('keydown', handleKeyDown)
+        const listener = document.body.removeEventListener('keydown', handleKeyDown)
         console.log({ listener });
         return
-    }   
+    }
     const sound = getSound();
     playSound(sound)
     prevSound = sound;
@@ -124,7 +137,7 @@ function resetPlayedMarks() {
 function playSound(sound) {
     if (!sound) return
     sound.currentTime = 0
-    sound.play();  
+    sound.play();
 }
 
 function getSound() {
