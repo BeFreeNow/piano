@@ -13,6 +13,10 @@ body {
     background-color: antiquewhite;
 }
 
+h2 {
+    margin-bottom: 16px
+}
+
 button{
     cursor: pointer;
 }
@@ -32,9 +36,11 @@ button{
 
 .melody {
     min-height: 100px;
-    padding: 16px 0;
+    padding: 8px;
     max-width: 700px;
-    margin: 0 16px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    margin:  8px 8px 16px;
 }
 
 .played {
@@ -51,7 +57,7 @@ button{
 
 .keyboard, .controls {
     width: fit-content;
-    margin: auto 16px;
+    margin: auto 16px 8px;
 }
 
 .keyboard-key {
@@ -61,7 +67,7 @@ button{
 }
 
 .click-below {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .controls {
@@ -72,7 +78,7 @@ button{
     height: 40px;
     padding: 4px;
     margin-right: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .play {
@@ -87,6 +93,3 @@ button{
     outline: none;
 }
 
-h2 {
-    margin-bottom: 16px
-}
