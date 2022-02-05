@@ -51,7 +51,7 @@ body {
     margin-bottom: 4px;
 }
 
-.controls button {
+.controls button, .play {
     height: 32px;
     padding: 4px;
 }

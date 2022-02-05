@@ -13,6 +13,7 @@ const elReset = document.querySelector('.reset')
 const elSave = document.querySelector('.save')
 const elStart = document.querySelector('.start')
 const elKeyboard = document.querySelector('.keyboard')
+const elPlay = document.querySelector('.play')
 const elBody = document.body
 
 elClear.addEventListener('click', handleClear)
@@ -21,6 +22,7 @@ elSave.addEventListener('click', handleSave)
 elStart.addEventListener('click', handleStart)
 elBody.addEventListener('keydown', handleKeyDown)
 elBody.addEventListener('keyup', handleKeyUp)
+elPlay.addEventListener('click', handlePlayButtonClick)
 
 let defaultMelody = [
     { "keyboardIndex": "34", "key": "B5" }, { "keyboardIndex": "33", "key": "A5" }, { "keyboardIndex": "30", "key": "E5" },
@@ -93,7 +95,7 @@ function handleStart() {
     elStart.blur()
 }
 
-function handleButtonClick(button) {
+function handleKeyboardClick(button) {
     const keyboardIndex = button.getAttribute('data-idx')
     const key = button.getAttribute('data-key')
     const sound = keyboardSounds[keyboardIndex]
@@ -118,6 +120,16 @@ function handleKeyDown({ key }) {
     melodyIndex++;
     if (melodyIndex === userMelody.length) melodyIndex = 0
     lastKey = key
+}
+
+function handlePlayButtonClick() {
+    const sound = getSound();
+    playSound(sound)
+    prevSound = sound;
+    if (melodyIndex === 0) resetPlayedMarks()
+    markPlayed(melodyIndex)
+    melodyIndex++;
+    if (melodyIndex === userMelody.length) melodyIndex = 0
 }
 
 function handleKeyUp({ key }) {
