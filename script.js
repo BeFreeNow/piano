@@ -36,7 +36,7 @@ let defaultMelody = [
     { "keyboardIndex": "28", "key": "C5" }, { "keyboardIndex": "29", "key": "D5" }, { "keyboardIndex": "30", "key": "E5" }
 ]
 let melodyIndex = 0
-let lastKey
+let lastKeyDown
 let prevSound
 let savedMelody = localStorage.getItem('melody')
 savedMelody = JSON.parse(savedMelody)
@@ -117,13 +117,13 @@ function handlePlaySound() {
 }
 
 function handleKeyDown({ key }) {
-    const isKeyHold = lastKey === key
+    const isKeyHold = lastKeyDown === key
     if (isKeyHold) {
         elBody.removeEventListener('keydown', handleKeyDown)
         return
     }
     handlePlaySound()
-    lastKey = key
+    lastKeyDown = key
 }
 
 function addUniqueEventListener(element, event, callback) {
@@ -131,14 +131,14 @@ function addUniqueEventListener(element, event, callback) {
     element.addEventListener(event, callback)
 }
 
-function handleKeyUp({ key }) {
-    if (lastKey === key) lastKey = null
+function handleKeyUp({ key: keyUp }) {
+    if (lastKeyDown === keyUp) lastKeyDown = null
     addUniqueEventListener(elBody, 'keydown', handleKeyDown)
 }
 
 function handlePlayButtonClick() {
     handlePlaySound()
-    lastKey = null
+    lastKeyDown = null
     elPlay.blur()
 }
 
