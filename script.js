@@ -37,7 +37,6 @@ let defaultMelody = [
 ]
 let melodyIndex = 0
 let lastKeyDown
-let prevSound
 let savedMelody = localStorage.getItem('melody')
 savedMelody = JSON.parse(savedMelody)
 let userMelody = savedMelody?.length ? savedMelody : defaultMelody
@@ -79,7 +78,6 @@ function handleReset() {
     userMelody = []
     elMelody.innerHTML = ''
     melodyIndex = 0
-    prevSound = null
     elReset.blur()
 }
 
@@ -109,7 +107,6 @@ function handleKeyboardClick(button) {
 function handlePlaySound() {
     const sound = getNextSound();
     playSound(sound)
-    prevSound = sound;
     if (melodyIndex === 0) resetPlayedMarks()
     markPlayed(melodyIndex)
     melodyIndex++;
