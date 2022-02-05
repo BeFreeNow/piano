@@ -17,7 +17,7 @@ h2 {
     margin-bottom: 16px
 }
 
-button{
+button {
     cursor: pointer;
 }
 
@@ -35,11 +35,12 @@ button{
 }
 
 .melody {
-    height: fit-content;
-    max-width: 90%;
+    width: 90%;
+    max-width: 800px;
     padding: 8px;
-    max-width: 700px;
-    margin:  8px 8px 16px;
+    margin: 8px 8px 16px;
+    border-radius: 8px;
+    border: 1px solid lightgray;
 }
 
 .played {
@@ -56,6 +57,7 @@ button{
 
 .keyboard, .controls {
     width: fit-content;
+    max-width: 800px;
     margin: auto 16px 8px;
 }
 
@@ -91,4 +93,3 @@ button{
     border: 0;
     outline: none;
 }
-
