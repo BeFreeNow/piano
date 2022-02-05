@@ -35,12 +35,12 @@ button {
 }
 
 .melody {
+    min-height: 100px;
     width: 90%;
     max-width: 800px;
-    padding: 8px;
-    margin: 8px 8px 16px;
-    border-radius: 8px;
-    border: 1px solid lightgray;
+    padding:  0 8px;
+    margin: 0 16px 16px;
+    overflow: auto;
 }
 
 .played {
