@@ -121,15 +121,19 @@ function handleKeyDown({ key }) {
     handlePlaySound()
 }
 
+function preventPlayOnKeyHold(key) {
+    if (lastKey === key) {
+        elBody.removeEventListener('keydown', handleKeyDown)
+    }
+    setLastKey(key)
+}
+
 function handleKeyUp({ key }) {
     elBody.addEventListener('keydown', handleKeyDown)
     resetLastKey(key)
 }
 
-function preventPlayOnKeyHold(key) {
-    if (lastKey === key) {
-        elBody.removeEventListener('keydown', handleKeyDown)
-    }
+function setLastKey(key) {
     lastKey = key
 }
 
