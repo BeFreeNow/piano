@@ -85,13 +85,13 @@ function handleReset() {
 
 function handleSave() {
     localStorage.setItem('melody', JSON.stringify(userMelody))
-    elSave.blur()
     melodyIndex = 0
+    elSave.blur()
 }
 
 function handleStart() {
     melodyIndex = 0
-    elUserNotes.forEach(el => el.classList.remove('played'))
+    resetPlayedMarks()
     elStart.blur()
 }
 
@@ -102,12 +102,12 @@ function handleKeyboardClick(button) {
     playSound(sound)
     userMelody.push({ keyboardIndex, key })
     generateMelodyHtml()
-    button.blur()
     melodyIndex = 0
+    button.blur()
 }
 
 function handlePlaySound() {
-    const sound = getSound();
+    const sound = getNextSound();
     playSound(sound)
     prevSound = sound;
     if (melodyIndex === 0) resetPlayedMarks()
@@ -157,7 +157,7 @@ function playSound(sound) {
     sound.play();
 }
 
-function getSound() {
+function getNextSound() {
     if (!userMelody.length) return
     const { keyboardIndex } = userMelody[melodyIndex]
     return keyboardSounds[keyboardIndex]
