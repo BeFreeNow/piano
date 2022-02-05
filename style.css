@@ -22,10 +22,15 @@ body {
     align-items: center;
 }
 
+.headline {
+    margin-bottom: 32px;
+}
+
 .melody {
     min-height: 100px;
     padding: 16px 0;
     max-width: 700px;
+    margin: 0 16px;
 }
 
 .played {
@@ -42,13 +47,21 @@ body {
 
 .keyboard, .controls {
     width: fit-content;
-    margin: auto;
+    margin: auto 16px;
 }
 
 .keyboard-key {
     width: 32px;
     height: 32px;
     margin-bottom: 4px;
+}
+
+.click-below {
+    margin-bottom: 32px;
+}
+
+.controls {
+    margin-bottom: 32px;
 }
 
 .controls button {
@@ -61,4 +74,8 @@ body {
     width: 300px;
     padding: 16px;
     font-size: 32px;
+}
+
+h2{
+    margin-bottom: 16px
 }
