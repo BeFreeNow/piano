@@ -51,7 +51,14 @@ body {
     margin-bottom: 4px;
 }
 
-.controls button, .play {
+.controls button {
     height: 32px;
     padding: 4px;
+}
+
+.play {
+    height: 96px;
+    width: 300px;
+    padding: 16px;
+    font-size: 32px;
 }
