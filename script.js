@@ -97,9 +97,9 @@ function handleStart() {
 
 function handleKeyboardClick(button) {
     const keyboardIndex = button.getAttribute('data-idx')
-    const key = button.getAttribute('data-key')
     const sound = keyboardSounds[keyboardIndex]
     playSound(sound)
+    const key = button.getAttribute('data-key')
     userMelody.push({ keyboardIndex, key })
     generateMelodyHtml()
     melodyIndex = 0
@@ -126,14 +126,14 @@ function handleKeyDown({ key }) {
     lastKey = key
 }
 
-function addUniqueListener(element, event, callback) {
+function addUniqueEventListener(element, event, callback) {
     element.removeEventListener(event, callback)
     element.addEventListener(event, callback)
 }
 
 function handleKeyUp({ key }) {
     if (lastKey === key) lastKey = null
-    addUniqueListener(elBody, 'keydown', handleKeyDown)
+    addUniqueEventListener(elBody, 'keydown', handleKeyDown)
 }
 
 function handlePlayButtonClick() {
